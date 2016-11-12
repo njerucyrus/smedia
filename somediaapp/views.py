@@ -27,7 +27,7 @@ def user_login(request):
     user = request.user
     next_url = request.GET.get('next', '')
     if user.is_authenticated():
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/somedia/index/')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -37,7 +37,7 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     if next_url == '':
-                        return HttpResponseRedirect('/')
+                        return HttpResponseRedirect('/somedia/index/')
                     elif next_url:
                         return HttpResponseRedirect(next_url)
             else:
@@ -125,6 +125,15 @@ def post_tweet(request, product_id=None):
     else:
         tweet_form = TweetForm(initial=form_initial)
     return render(request, 'send_tweet.html', {'tweet_form': tweet_form})
+
+
+@login_required(login_url='/login/')
+def display_my_products(request):
+    user = get_object_or_404(User, username=str(request.user))
+    profile = get_object_or_404(UserProfile, user=user)
+    products = Product.objects.filter(profile=profile)
+    return render(request, 'products.html', {'products': products, })
+
 
 
 

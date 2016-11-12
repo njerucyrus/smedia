@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron" style="background-color: #ffffff!important;">
+<div class="col col-md-6">
+    {% if products %}
+        <ul class="list-group">
+        {% for product in products %}
+
+            <li class="list-group-item">{{ product.product_name }}
+            <a href="{% url 'somedia:post_tweet' product_id=product.id  %}">
+                create tweet advert
+            </a>
+            </li>
+        {% endfor %}
+
+        </ul>
+    {% else %}
+    {% endif %}
+</div>
+
+</div>
+{% endblock %}
