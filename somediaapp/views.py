@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from somediaapp.models import (
     UserProfile,
     Product,
@@ -13,8 +14,42 @@ from somediaapp.forms import (
     UserRegistrationForm,
     UserProfileForm,
     TweetForm,
+    LoginForm,
 
 )
+
+
+def user_login(request):
+    user = request.user
+    next_url = request.GET.get('next', '')
+    if user.is_authenticated():
+        return HttpResponseRedirect('/')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    if next_url == '':
+                        return HttpResponseRedirect('/')
+                    elif next_url:
+                        return HttpResponseRedirect(next_url)
+            else:
+
+                message = 'Wrong username or password'
+                form = LoginForm()
+                return render(request, 'login.html', {'form': form, 'message': message, })
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form, })
+
+
+@login_required(login_url='/login/')
+def user_logout(request):
+    logout(request)
+    return render(request, 'logout_then_login.html', {})
 
 
 def create_account(request):
