@@ -108,6 +108,7 @@ def add_product(request):
 
 import tweepy
 from django.conf import settings
+import json
 
 def get_api():
     consumer_key = str(settings.SOCIAL_AUTH_TWITTER_KEY)
@@ -133,13 +134,17 @@ def post_tweet(request, product_id=None):
             product.tweet = tweet_text
             try:
                 api = get_api()
-                api.update_status(status=tweet_text)
+                status = api.update_status(status=tweet_text)
                 # the logic for sending tweet to twitter here
+
                 product.save()
+
+                print str(status.id)
+
                 message = "broadcast sent successfully"
                 return HttpResponse(message)
             except Exception, e:
-                return HttpResponse("error occured {}".format(str(e)))
+                return HttpResponse("error occured {0}".format(str(e)))
 
     else:
         tweet_form = TweetForm(initial=form_initial)
