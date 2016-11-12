@@ -19,6 +19,10 @@ from somediaapp.forms import (
 )
 
 
+def index(request):
+    return render(request, 'index.html', {})
+
+
 def user_login(request):
     user = request.user
     next_url = request.GET.get('next', '')
