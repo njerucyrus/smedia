@@ -5,7 +5,7 @@ from somediaapp.models import UserProfile
 
 
 class TweetForm(forms.Form):
-    product_name = forms.CharField(max_length=32, )
+    product_name = forms.CharField(max_length=32, disabled=True)
     text = forms.CharField(max_length=140, widget=forms.Textarea(
         attrs={'id': 'text_id', 'placeholder': 'Advert broadcast tweet text'}
     ))
