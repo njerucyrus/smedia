@@ -43,7 +43,7 @@
 
         /* Add a gray background color and some padding to the footer */
         footer {
-            background-color: #f2f2f2!important;
+            background-color: #f2f2f2 !important;
             padding: 25px;
         }
     </style>
@@ -70,13 +70,16 @@
             <ul class="nav navbar-nav">
 
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
+                    <li><a href="{% url 'somedia:my_products' %}">Products</a></li>
+                    <li><a href="{% url 'somedia:add_product' %}">Create a product</a></li>
+                    <li><a href="#">Product Tweets</a></li>
+
                 <li><a href="#">Product Performance</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Analytics
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Responses </li>
+                        <li class="dropdown-header">Responses</li>
                         <li><a href="#"> User Product Responses</a></li>
 
 
@@ -106,7 +109,8 @@
 
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>
                     {{ request.user }}
-                    <li><a href="{% url 'somedia:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    <li><a href="{% url 'somedia:logout' %}"><span class="glyphicon glyphicon-log-out"></span>
+                        Logout</a>
                     </li>
                 {% else %}
                     <li><a href="{% url 'somedia:login' %}"><span class="glyphicon glyphicon-log-out"></span> Login</a>
@@ -120,13 +124,12 @@
 </nav>
 
 
+<div class="row">
 
-    <div class="row">
+    {% block content %}
 
-            {% block content %}
-
-            {% endblock %}
-        </div>
+    {% endblock %}
+</div>
 <footer class="container-fluid text-center">
     Somedia Copyright &copy;2016
 </footer>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col col-md-6" style="background-color: #ffffff!important; margin-left: 250px;">
+<div class="jumbotron" style="background-color: #ffffff!important;">
+<form action="" method="post">
+    {{ tweet_form | crispy }}
+    {% csrf_token %}
+    <input type="submit" value="send" class="btn btn-primary btn-raised">
+</form>
+</div>
+
+</div>
+
+{% endblock %}

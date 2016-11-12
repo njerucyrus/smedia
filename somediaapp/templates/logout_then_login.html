@@ -1,1 +1,11 @@
-<
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col col-md-6">
+
+    <div class="col col-md-4">
+    <h6>You are now logged out  <a href="{% url 'somedia:login' %}" class="btn btn-success">login again</a>  </h6>
+</div>
+
+</div>
+{% endblock %}

@@ -50,7 +50,7 @@ def user_login(request):
     return render(request, 'login.html', {'form': form, })
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/somedia/login/')
 def user_logout(request):
     logout(request)
     return render(request, 'logout_then_login.html', {})
@@ -82,7 +82,8 @@ def create_account(request):
         'profile_form': profile_form,
         })
 
-@login_required(login_url='/login/')
+
+@login_required(login_url='/somedia/login/')
 def add_product(request):
     user = get_object_or_404(User, username=str(request.user))
     profile = get_object_or_404(UserProfile, user=user)
@@ -105,7 +106,7 @@ def add_product(request):
     return render(request, 'add_product.html', {'product_form': product_form, })
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/somedia/login/')
 def post_tweet(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
     product_name = str(product.product_name)
@@ -127,7 +128,7 @@ def post_tweet(request, product_id=None):
     return render(request, 'send_tweet.html', {'tweet_form': tweet_form})
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/somedia/login/')
 def display_my_products(request):
     user = get_object_or_404(User, username=str(request.user))
     profile = get_object_or_404(UserProfile, user=user)
