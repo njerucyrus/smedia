@@ -12,7 +12,7 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'profile', 'product_name', 'tweet']
+    list_display = ['id', 'profile', 'product_name', 'tweet_id',  'tweet']
 
     class Meta:
         model = Product

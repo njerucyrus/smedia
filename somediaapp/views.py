@@ -140,7 +140,8 @@ def post_tweet(request, product_id=None):
 
                 product.save()
 
-                print str(status.id)
+                print str(status.id_str)
+                print str(status.in_reply_to_status_id_str)
 
                 message = "broadcast sent successfully"
                 return HttpResponse(message)
@@ -150,6 +151,20 @@ def post_tweet(request, product_id=None):
     else:
         tweet_form = TweetForm(initial=form_initial)
     return render(request, 'send_tweet.html', {'tweet_form': tweet_form})
+
+
+def analyse_product_tweet(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    tweet_id = str(product.tweet_id)
+    fetched_replies = []
+    api = get_api()
+    timeline = api.search(q="@Smart_Ad_")
+    for tweet in timeline:
+        if tweet.in_reply_to_status_id_str:
+            reply = tweet.text
+            fetched_replies.append(reply)
+
+    return HttpResponse('completed')
 
 
 @login_required(login_url='/somedia/login/')
