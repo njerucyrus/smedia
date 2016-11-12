@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from somediaapp.models import UserProfile
+
 
 class TweetForm(forms.Form):
     product_name = forms.CharField(max_length=32, )
@@ -28,6 +30,12 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('company_name', )
 
 
 class LoginForm(forms.Form):
