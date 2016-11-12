@@ -1,3 +1,27 @@
 from django.contrib import admin
+from somediaapp.models import *
 
-# Register your models here.
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'business_name']
+
+    class Meta:
+        model = UserProfile
+
+admin.site.register(UserProfile, UserProfileAdmin)
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'profile', 'product_name', 'tweet']
+
+    class Meta:
+        model = Product
+admin.site.register(Product, ProductAdmin)
+
+
+class TweetReplyAdmin(admin.ModelAdmin):
+    list_display = ['product', 'latitude', 'longitude', 'status']
+
+    class Meta:
+        model = TweetReply
+admin.site.register(TweetReply, TweetReplyAdmin)

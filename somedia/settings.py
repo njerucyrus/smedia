@@ -32,14 +32,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #my apps
     'somediaapp',
+    #third part apps
     'crispy_forms',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +73,19 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social.backends.twitter.TwitterOAuth',
+)
+
+SOCIAL_AUTH_TWITTER_KEY = 'FmgSM8eTkGLAhDHmEMDaXqyvJ' #os.environ['SOCIAL_AUTH_TWITTER_KEY']
+
+SOCIAL_AUTH_TWITTER_SECRET = '9SKdgYtlq3NLt6Kad0l4DOT2WAp52L7is5TeGgXnqbZhBBFn9d' #os.environ['SOCIAL_AUTH_TWITTER_SECRET']
+
+TWITTER_ACCESS_TOKEN = '796985924940865536-78Tgli7f5GCXkePTvuKpFNvuSeic3K3'
+
+TWITTER_ACCESS_TOKEN_SECRET = 'r8gHk4FLwjPaUiInpLj5rX44uut5irhhEwO2QfgDtrQxl'
 
 WSGI_APPLICATION = 'somedia.wsgi.application'
 

@@ -19,4 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^somedia/', include('somediaapp.urls', namespace='somedia')),
+    url(r'^', include('social.apps.django_app.urls', namespace='social')),
 ]
+
+admin.site.site_header = 'Somedia'

@@ -35,7 +35,7 @@ class UserRegistrationForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('company_name', )
+        fields = ('business_name', )
 
 
 class LoginForm(forms.Form):

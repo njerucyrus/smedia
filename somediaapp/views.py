@@ -106,6 +106,19 @@ def add_product(request):
     return render(request, 'add_product.html', {'product_form': product_form, })
 
 
+import tweepy
+from django.conf import settings
+
+def get_api():
+    consumer_key = str(settings.SOCIAL_AUTH_TWITTER_KEY)
+    secret_key = str(settings.SOCIAL_AUTH_TWITTER_SECRET)
+    access_token = str(settings.TWITTER_ACCESS_TOKEN)
+    access_token_secret = str(settings.TWITTER_ACCESS_TOKEN_SECRET)
+    auth = tweepy.OAuthHandler(consumer_key, secret_key)
+    auth.set_access_token(access_token, access_token_secret)
+    return tweepy.API(auth)
+
+
 @login_required(login_url='/somedia/login/')
 def post_tweet(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
@@ -118,11 +131,16 @@ def post_tweet(request, product_id=None):
             cd = tweet_form.cleaned_data
             tweet_text = cd['text']
             product.tweet = tweet_text
+            try:
+                api = get_api()
+                api.update_status(status=tweet_text)
+                # the logic for sending tweet to twitter here
+                product.save()
+                message = "broadcast sent successfully"
+                return HttpResponse(message)
+            except Exception, e:
+                return HttpResponse("error occured {}".format(str(e)))
 
-            # the logic for sending tweet to twitter here
-            product.save()
-            message = "broadcast sent successfully"
-            return HttpResponse(message)
     else:
         tweet_form = TweetForm(initial=form_initial)
     return render(request, 'send_tweet.html', {'tweet_form': tweet_form})

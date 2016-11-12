@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, )
-    company_name = models.CharField(max_length=64, blank=True, null=True)
+    business_name = models.CharField(max_length=64, blank=True, null=True)
 
     def __unicode__(self):
         return str(self.user)
