@@ -12,8 +12,9 @@ class UserProfile(models.Model):
 
 
 class Product(models.Model):
-    profile = models.OneToOneField(UserProfile, )
+    profile = models.ForeignKey(UserProfile, )
     product_name = models.CharField(max_length=32, )
+    tweet_id = models.CharField(max_length=128, null=True, blank=True)
     tweet = models.TextField(max_length=140, null=False)
 
     def __unicode__(self):

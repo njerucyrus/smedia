@@ -110,6 +110,7 @@ import tweepy
 from django.conf import settings
 import json
 
+
 def get_api():
     consumer_key = str(settings.SOCIAL_AUTH_TWITTER_KEY)
     secret_key = str(settings.SOCIAL_AUTH_TWITTER_SECRET)
