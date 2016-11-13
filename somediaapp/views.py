@@ -137,6 +137,7 @@ def post_tweet(request, product_id=None):
                 api = get_api()
                 status = api.update_status(status=tweet_text)
                 # the logic for sending tweet to twitter here
+                product.tweet_id = str(status.id_str)
 
                 product.save()
 
@@ -157,12 +158,18 @@ def analyse_product_tweet(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     tweet_id = str(product.tweet_id)
     fetched_replies = []
+    ips = []
     api = get_api()
     timeline = api.search(q="@Smart_Ad_")
     for tweet in timeline:
         if tweet.in_reply_to_status_id_str:
+            print tweet.id_str
             reply = tweet.text
+            print reply
             fetched_replies.append(reply)
+
+    # get the ip
+
 
     return HttpResponse('completed')
 

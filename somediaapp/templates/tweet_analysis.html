@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="col col-md-6">
+    <h6>Analysis for product {{ product }}</h6>
+    <table class="col col-md-12">
+        <tr>
+            <td>#</td>
+            <td>User Response</td>
+            <td>Status</td>
+        </tr>
+        {% for tweet in tweets  %}
+            <tr>
+                <td>
+                <i style="font-size:48px" class="fa" background-color="blue">&#xf099;</i>
+                </td>
+            <td>
+                <p>{{ tweet }}</p>
+            </td>
+
+            <td>
+                <p>{{ status }}</p>
+            </td>
+
+            </tr>
+
+        {% endfor %}
+
+
+
+    </table>
+    </div>
+
+{% endblock %}

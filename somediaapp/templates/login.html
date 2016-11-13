@@ -14,11 +14,6 @@
             <div class="col-col-md-3"></div>
             <div class="div-login-form col col-md-6">
                 <p><strong class="btn btn-primary">Login Here</strong></p>
-
-                <a href="{% url "social:begin" "twitter"%}" class="btn btn-success btn-raised">Login with Twitter</a></li>
-{#                <a href="#"><img src="{% static 'images/twitter_login_btn.jpg' %}  " height="100px" width="200px"></a>#}
-
-
                 {% if message %}
                     <div class="alert alert-danger" role="alert">
                         <strong>{{ message }}</strong>
