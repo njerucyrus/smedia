@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../farm_manager/.idea/farm_manager.iml" filepath="$PROJECT_DIR$/../farm_manager/.idea/farm_manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/somedia.iml" filepath="$PROJECT_DIR$/.idea/somedia.iml" />
     </modules>
   </component>

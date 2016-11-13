@@ -20,7 +20,7 @@ admin.site.register(Product, ProductAdmin)
 
 
 class TweetReplyAdmin(admin.ModelAdmin):
-    list_display = ['product', 'latitude', 'longitude', 'status']
+    list_display = ['product', 'reply', 'latitude', 'longitude', 'status']
 
     class Meta:
         model = TweetReply
