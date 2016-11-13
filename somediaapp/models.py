@@ -23,8 +23,8 @@ class Product(models.Model):
 
 class TweetReply(models.Model):
     product = models.ForeignKey(Product, )
-    latitude = models.DecimalField(max_digits=64, decimal_places=10)
-    longitude = models.DecimalField(max_digits=64, decimal_places=10)
+    latitude = models.DecimalField(max_digits=64, decimal_places=10, null=True, )
+    longitude = models.DecimalField(max_digits=64, decimal_places=10, null=True, )
     status = models.CharField(max_length=3)
 
     def __unicode__(self):
