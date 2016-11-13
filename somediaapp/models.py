@@ -23,6 +23,7 @@ class Product(models.Model):
 
 class TweetReply(models.Model):
     product = models.ForeignKey(Product, )
+    reply = models.CharField(max_length=140, null=True, blank=True)
     latitude = models.DecimalField(max_digits=64, decimal_places=10)
     longitude = models.DecimalField(max_digits=64, decimal_places=10)
     status = models.CharField(max_length=3)

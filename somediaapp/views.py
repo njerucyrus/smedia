@@ -27,7 +27,7 @@ def user_login(request):
     user = request.user
     next_url = request.GET.get('next', '')
     if user.is_authenticated():
-        return HttpResponseRedirect('/somedia/index/')
+        return HttpResponseRedirect('/')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -37,7 +37,7 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     if next_url == '':
-                        return HttpResponseRedirect('/somedia/index/')
+                        return HttpResponseRedirect('/')
                     elif next_url:
                         return HttpResponseRedirect(next_url)
             else:
@@ -50,7 +50,7 @@ def user_login(request):
     return render(request, 'login.html', {'form': form, })
 
 
-@login_required(login_url='/somedia/login/')
+@login_required(login_url='/login/')
 def user_logout(request):
     logout(request)
     return render(request, 'logout_then_login.html', {})
@@ -83,7 +83,7 @@ def create_account(request):
         })
 
 
-@login_required(login_url='/somedia/login/')
+@login_required(login_url='/login/')
 def add_product(request):
     user = get_object_or_404(User, username=str(request.user))
     profile = get_object_or_404(UserProfile, user=user)
@@ -121,7 +121,7 @@ def get_api():
     return tweepy.API(auth)
 
 
-@login_required(login_url='/somedia/login/')
+@login_required(login_url='/login/')
 def post_tweet(request, product_id=None):
     product = get_object_or_404(Product, id=product_id)
     product_name = str(product.product_name)
@@ -169,12 +169,19 @@ def analyse_product_tweet(request, product_id):
             fetched_replies.append(reply)
 
     # get the ip
+    return HttpResponse('analysis completed')
+
+@login_required(login_url='/login/')
+def get_stats(request, p_id=None):
+    user = get_object_or_404(User, username=str(request.user))
+    profile = get_object_or_404(UserProfile, user=user)
+    product = Product.objects.filter(profile=profile,)
 
 
-    return HttpResponse('completed')
+    return
 
 
-@login_required(login_url='/somedia/login/')
+@login_required(login_url='/login/')
 def display_my_products(request):
     user = get_object_or_404(User, username=str(request.user))
     profile = get_object_or_404(UserProfile, user=user)
